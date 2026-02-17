@@ -123,7 +123,8 @@ export const getSiteConfig = (domain: string): SiteConfig | undefined => {
     // Development/Localhost handling
     // If accessing via localhost or IP, default to main site for testing
     // You can change this to test other sites locally (e.g. "survival.moabytepress.com")
-    if (cleanDomain === "localhost" || cleanDomain === "127.0.0.1" || cleanDomain.match(/^192\.168\.\d+\.\d+$/)) {
+    if (cleanDomain === "localhost" || cleanDomain === "127.0.0.1" || cleanDomain.match(/^192\.168\.\d+\.\d+$/) || cleanDomain.endsWith(".vercel.app")) {
+
 
         return SITE_CONFIGS["moabytepress.com"];
     }
