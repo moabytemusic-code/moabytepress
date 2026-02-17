@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Moabyte Press Multi-Division Platform
 
-First, run the development server:
+This is a Next.js application designed to support multiple subdomains (divisions) from a single codebase.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Architecture
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Middleware (`src/middleware.ts`)**: Rewrites requests based on the `Host` header to specific site folders (e.g., `survival.moabytepress.com` -> `/[site]`).
+- **Site Configuration (`src/lib/sites.ts`)**: Central configuration for all divisions (Parent, Survival, AI, Health, Women's Health). Defines themes, navigation, and branding.
+- **Dynamic Routing (`src/app/[site]`)**: A single dynamic route handles content for all sites, rendering appropriate layouts and components based on the site config.
+- **Tailwind CSS**: Uses utility classes defined in the site config for theming without complex runtime CSS injections.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-## Learn More
+2. **Environment Variables**:
+   Create `.env.local`:
+   ```env
+   NEXT_PUBLIC_ROOT_DOMAIN=moabytepress.com
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. **Development**:
+   ```bash
+   npm run dev
+   ```
+   To test subdomains locally, you may need to update `/etc/hosts`:
+   ```
+   127.0.0.1 moabytepress.com
+   127.0.0.1 survival.moabytepress.com
+   127.0.0.1 ai.moabytepress.com
+   127.0.0.1 health.moabytepress.com
+   127.0.0.1 womenshealth.moabytepress.com
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   Then access `http://moabytepress.com:3000` or subdomains.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   **Mobile Testing:**
+   You can access the dev server via your local IP (e.g., `http://192.168.0.113:3000`).
+   By default, this shows the main "Corporate" site.
+   To test a specific division, add the `site_override` query parameter:
+   - `http://192.168.0.113:3000/?site_override=survival`
+   - `http://192.168.0.113:3000/?site_override=ai`
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Adding Content
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Edit `src/lib/sites.ts` to update navigation or branding.
+- Edit `src/app/[site]/page.tsx` to change the homepage structure.
+- Edit `src/components` to modify shared UI elements.
+
+## Deployment (Vercel)
+
+1. Connect this repository to Vercel.
+2. Add all domains (`moabytepress.com`, `survival.moabytepress.com`, etc.) to the Vercel project domain settings.
+3. The middleware will automatically handle routing based on the incoming hostname.
