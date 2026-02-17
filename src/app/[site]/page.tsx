@@ -5,6 +5,8 @@ import { Hero } from "@/components/ui/Hero";
 import { DivisionOverview } from "@/components/ui/DivisionOverview";
 import { FeaturedTitles } from "@/components/ui/FeaturedTitles";
 import { PublishingPhilosophy } from "@/components/ui/PublishingPhilosophy";
+import { WhyChooseUs } from "@/components/ui/WhyChooseUs";
+
 
 
 export async function generateMetadata({ params }: { params: Promise<{ site: string }> }) {
@@ -33,8 +35,10 @@ export default async function SitePage({ params }: { params: Promise<{ site: str
                 <>
                     <DivisionOverview />
                     <FeaturedTitles />
+                    <WhyChooseUs />
                     <PublishingPhilosophy />
                 </>
+
             ) : (
                 <div className="bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-100 shadow-sm">
                     <h2 className="text-2xl font-bold mb-4">Latest from {config.name}</h2>

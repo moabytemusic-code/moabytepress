@@ -2,34 +2,44 @@
 export interface Book {
     id: string;
     title: string;
+    tagline: string;
     division: "Survival" | "AI" | "Health" | "Women's Health";
     summary: string;
     coverUrl?: string; // Placeholder for now
     divisionUrl: string;
+    amazonLink: string;
 }
+
 
 export const BOOKS: Book[] = [
     {
         id: "survival-blueprint",
         title: "30-Day Survival Food Starter Blueprint",
+        tagline: "Actionable system for food resilience in 30 days.",
         division: "Survival",
         summary: "A structured approach to building a resilient food supply in 30 days.",
         divisionUrl: "https://survival.moabytepress.com",
+        amazonLink: "#",
     },
     {
         id: "ai-leverage",
         title: "The AI Leverage Framework",
+        tagline: "Strategic implementation of AI for digital leverage.",
         division: "AI",
         summary: "Implementing applied AI systems for maximum digital productivity.",
         divisionUrl: "https://ai.moabytepress.com",
+        amazonLink: "#",
     },
     {
         id: "metabolic-resilience",
         title: "Metabolic Resilience Systems",
+        tagline: "Evidence-based nutrition for performance bio-optimization.",
         division: "Health",
         summary: "Evidence-based nutrition frameworks for long-term health optimization.",
         divisionUrl: "https://health.moabytepress.com",
+        amazonLink: "#",
     }
+
 ];
 
 export interface Division {

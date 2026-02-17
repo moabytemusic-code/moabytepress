@@ -14,14 +14,36 @@ export default async function MediaPage({ params }: { params: Promise<{ site: st
 
             <div className="space-y-16">
                 <section>
-                    <h2 className="text-2xl font-bold text-slate-900 mb-4">Press Resources</h2>
+                    <h2 className="text-2xl font-bold text-slate-900 mb-4">Core Narrative</h2>
                     <p className="text-slate-600 leading-relaxed mb-6">
-                        Moabyte Press provides structured resources for media inquiries, including division briefings, author backgrounds, and high-resolution assets.
+                        Established in 2026, Moabyte Press was founded to solve the "abstraction gap" in modern publishing. We specialize in transforming complex subjects into high-clarity, implementation-first systems.
                     </p>
                     <div className="bg-slate-50 p-8 rounded-xl border border-slate-100 italic text-slate-500">
-                        Brand asset downloads and press kits are currently being finalized.
+                        "Our goal isn't just to inform, but to provide the actual blueprints for practical living in a high-leverage digital age."
                     </div>
                 </section>
+
+                <section>
+                    <h2 className="text-2xl font-bold text-slate-900 mb-4">Press Resources</h2>
+                    <p className="text-slate-600 leading-relaxed mb-6">
+                        Moabyte Press provides structured resources for media inquiries, including division briefings and author backgrounds.
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="p-4 border border-slate-100 rounded-lg bg-white">
+                            <h4 className="font-bold text-sm mb-1 uppercase tracking-wider text-slate-400">Media Bio</h4>
+                            <p className="text-xs text-slate-500 leading-relaxed">
+                                Moabyte Press is an independent publisher focused on providing structured, practical guidance across survival resilience, digital leverage, and metabolic health.
+                            </p>
+                        </div>
+                        <div className="p-4 border border-slate-100 rounded-lg bg-white">
+                            <h4 className="font-bold text-sm mb-1 uppercase tracking-wider text-slate-400">Brand Vision</h4>
+                            <p className="text-xs text-slate-500 leading-relaxed">
+                                We operate via decentralized divisions to ensure specialized depth while maintaining a unified commitment to clarity and implementation.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <section>

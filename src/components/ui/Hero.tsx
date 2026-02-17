@@ -48,19 +48,36 @@ export function Hero({ site }: HeroProps) {
                 </h1>
                 <p className={`text-xl md:text-3xl mb-4 font-medium ${isCorporate ? 'text-slate-800' : textClass}`}>
                     {isCorporate
-                        ? "Independent publishing focused on practical knowledge, structured systems, and modern self-education."
+                        ? "Publishing structured, practical guides that help people learn, apply, and grow in key areas of modern life."
                         : site.description}
                 </p>
                 {isCorporate && (
-                    <p className="text-lg md:text-xl text-slate-500 mb-8 max-w-2xl font-light leading-relaxed">
-                        We publish focused guides across survival systems, digital strategy, health optimization, and emerging technologies.
-                    </p>
+                    <div className="space-y-8">
+                        <p className="text-lg md:text-xl text-slate-500 max-w-2xl font-light leading-relaxed">
+                            Books and systems in resilience, AI strategy, health science, and practical living. High-clarity, implementation-first frameworks.
+                        </p>
+                        {/* Proof Bar */}
+                        <div className="flex flex-wrap gap-x-8 gap-y-4 py-6 border-y border-slate-100 items-center">
+                            <div className="flex flex-col">
+                                <span className="text-2xl font-bold text-slate-900">3</span>
+                                <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Divisions</span>
+                            </div>
+                            <div className="flex flex-col border-l border-slate-100 pl-8">
+                                <span className="text-2xl font-bold text-slate-900">150+</span>
+                                <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Resources Delivered</span>
+                            </div>
+                            <div className="flex flex-col border-l border-slate-100 pl-8">
+                                <span className="text-2xl font-bold text-slate-900 text-amber-600">Pure Systems</span>
+                                <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Methodology</span>
+                            </div>
+                        </div>
+                    </div>
                 )}
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-4 mt-8">
                     {isCorporate ? (
                         <Link
                             href="/divisions"
-                            className="inline-flex items-center px-8 py-3 border border-slate-200 text-base font-medium rounded-full shadow-sm text-slate-900 bg-white hover:bg-slate-50 transition-all"
+                            className="inline-flex items-center px-10 py-4 border border-slate-200 text-base font-semibold rounded-full shadow-sm text-slate-900 bg-white hover:bg-slate-50 transition-all hover:shadow-md"
                         >
                             View Our Divisions
                         </Link>
@@ -75,11 +92,12 @@ export function Hero({ site }: HeroProps) {
 
                     <Link
                         href="/books"
-                        className={`inline-flex items-center px-8 py-3 border ${isCorporate ? 'border-slate-200 text-slate-600' : 'border-white/30 text-white bg-white/10'} text-base font-medium rounded-full shadow-sm hover:brightness-95 transition-all`}
+                        className={`inline-flex items-center px-10 py-4 border ${isCorporate ? 'border-slate-200 text-slate-600' : 'border-white/30 text-white bg-white/10'} text-base font-semibold rounded-full shadow-sm hover:brightness-95 transition-all`}
                     >
                         Browse Books
                     </Link>
                 </div>
+
             </div>
 
             {!isCorporate && (
