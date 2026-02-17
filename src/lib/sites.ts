@@ -113,12 +113,30 @@ export const SITE_CONFIGS: Record<string, SiteConfig> = {
 
 export const getSiteConfig = (domain: string): SiteConfig | undefined => {
     // Normalize domain: remove port if present
-    const cleanDomain = domain.split(":")[0];
+    let cleanDomain = domain.split(":")[0];
+
+    // Normalize www
+    if (cleanDomain.startsWith("www.") && cleanDomain !== "www.moabytepress.com") {
+        // Optional: you might want to redirect www to non-www in middleware, 
+        // but for config lookup, we can try stripping it.
+        // However, if we defined "www.moabytepress.com" specifically (we haven't), we'd match it.
+        // Let's just strip it for lookup if direct match fails? 
+        // Or better, just add logic to try domain without www.
+    }
 
     // Direct match
     if (SITE_CONFIGS[cleanDomain]) {
         return SITE_CONFIGS[cleanDomain];
     }
+
+    // Try stripping www.
+    if (cleanDomain.startsWith("www.")) {
+        const nonWww = cleanDomain.replace("www.", "");
+        if (SITE_CONFIGS[nonWww]) {
+            return SITE_CONFIGS[nonWww];
+        }
+    }
+
 
     // Development/Localhost handling
     // If accessing via localhost or IP, default to main site for testing
