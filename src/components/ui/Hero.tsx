@@ -14,8 +14,8 @@ export function Hero({ site }: HeroProps) {
     // Map theme to gradient styles for "rich aesthetics"
     switch (site.emailTag) {
         case "corporate":
-            backgroundClass = "bg-gradient-to-br from-slate-900 to-slate-800 text-white";
-            textClass = "text-slate-100";
+            backgroundClass = "bg-white text-slate-900 border border-slate-100";
+            textClass = "text-slate-600";
             break;
         case "survival":
             backgroundClass = "bg-gradient-to-br from-emerald-900 via-stone-900 to-black text-emerald-50";
@@ -38,44 +38,56 @@ export function Hero({ site }: HeroProps) {
             textClass = "text-gray-600";
     }
 
+    const isCorporate = site.emailTag === "corporate";
+
     return (
-        <div className={`relative overflow-hidden rounded-3xl shadow-2xl py-24 px-8 md:px-16 lg:px-24 mb-16 ${backgroundClass}`}>
-            <div className="relative z-10 max-w-3xl">
-                <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 drop-shadow-lg">
-                    {site.name}
+        <div className={`relative overflow-hidden rounded-3xl ${isCorporate ? 'shadow-none' : 'shadow-2xl'} py-24 px-8 md:px-16 lg:px-24 mb-16 ${backgroundClass}`}>
+            <div className="relative z-10 max-w-4xl">
+                <h1 className={`text-4xl md:text-7xl font-extrabold tracking-tight mb-6 ${isCorporate ? 'text-slate-900' : 'drop-shadow-lg'}`}>
+                    {isCorporate ? "Moabyte Press" : site.name}
                 </h1>
-                <p className={`text-xl md:text-2xl mb-8 font-light ${textClass}`}>
-                    {site.description}
+                <p className={`text-xl md:text-3xl mb-4 font-medium ${isCorporate ? 'text-slate-800' : textClass}`}>
+                    {isCorporate
+                        ? "Independent publishing focused on practical knowledge, structured systems, and modern self-education."
+                        : site.description}
                 </p>
+                {isCorporate && (
+                    <p className="text-lg md:text-xl text-slate-500 mb-8 max-w-2xl font-light leading-relaxed">
+                        We publish focused guides across survival systems, digital strategy, health optimization, and emerging technologies.
+                    </p>
+                )}
                 <div className="flex flex-wrap gap-4">
-                    {site.emailTag !== "corporate" ? (
+                    {isCorporate ? (
+                        <Link
+                            href="/divisions"
+                            className="inline-flex items-center px-8 py-3 border border-slate-200 text-base font-medium rounded-full shadow-sm text-slate-900 bg-white hover:bg-slate-50 transition-all"
+                        >
+                            View Our Divisions
+                        </Link>
+                    ) : (
                         <Link
                             href="#blueprint"
                             className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-gray-900 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform transform hover:scale-105"
                         >
                             Get the Blueprint
                         </Link>
-                    ) : (
-                        <Link
-                            href="/divisions"
-                            className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-gray-900 bg-white hover:bg-gray-50 transition-transform transform hover:scale-105"
-                        >
-                            Explore Divisions
-                        </Link>
                     )}
 
                     <Link
                         href="/books"
-                        className="inline-flex items-center px-8 py-3 border border-white/30 text-base font-medium rounded-full shadow-sm text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-transform transform hover:scale-105"
+                        className={`inline-flex items-center px-8 py-3 border ${isCorporate ? 'border-slate-200 text-slate-600' : 'border-white/30 text-white bg-white/10'} text-base font-medium rounded-full shadow-sm hover:brightness-95 transition-all`}
                     >
                         Browse Books
                     </Link>
                 </div>
             </div>
 
-            {/* Decorative elements for "Modern/Dynamic" feel */}
-            <div className="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 rounded-full bg-white/10 blur-3xl" />
-            <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-64 h-64 rounded-full bg-black/10 blur-3xl" />
+            {!isCorporate && (
+                <>
+                    <div className="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 rounded-full bg-white/10 blur-3xl" />
+                    <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-64 h-64 rounded-full bg-black/10 blur-3xl" />
+                </>
+            )}
         </div>
     );
 }
